@@ -875,8 +875,8 @@ export const getProtocolsByChain = async ({ metadata, chain }: { chain: string; 
 				slug: slug(metadataCache.protocolMetadata[protocol.defillamaId].displayName),
 				chains: metadataCache.protocolMetadata[protocol.defillamaId].chains,
 				category: protocol.category ?? null,
-				tvl: protocol.tvl != null && protocol.category !== 'Bridge' ? tvls : null,
-				tvlChange: protocol.tvl != null && protocol.category !== 'Bridge' ? tvlChange : null,
+				tvl: (protocol.tvl != null && protocol.category !== 'Bridge') || (tvls?.default?.tvl != null && protocol.category === 'Bridge') ? tvls : null,
+				tvlChange: ((protocol.tvl != null && protocol.category !== 'Bridge') || (tvls?.default?.tvl != null && protocol.category === 'Bridge')) ? tvlChange : null,
 				mcap: protocol.mcap ?? null,
 				mcaptvl:
 					protocol.mcap && protocol.category !== 'Bridge' && tvls?.default?.tvl
